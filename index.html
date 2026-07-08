@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda - Diana y Brian</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fuentes elegantes (puedes cambiarlas en Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>  
+
+    <!-- Música de fondo (opcional) -->
+    <audio id="bg-music" loop>
+        <source src="/Users/dianafernandez/Desktop/Nuestra boda/Banda El Recodo De Cruz Lizárraga - Eso Y Más (Audio).mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="invitation-container">
+        
+        <!-- Portada principal -->
+        <header class="hero-section">
+            <div id="music-control" class="music-box-btn" onclick="toggleMusic()">▶️</div>
+             <span id="music-icon">▶️</span>
+            <div class="hero-image" style="background-image: url('/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-02 at 00.32.18.jpeg');"></div>
+            <div class="hero-text">
+                <h1>Diana y Brian</h1>
+                <p class="date-main">11 . DIC . 2026</p>
+                <h2 class="event-title">Nuestra Boda</h2>
+            </div>
+        </header>
+
+        <!-- Cuenta Regresiva -->
+        <section class="countdown-section">
+            <h3>¡Faltan pocos días!</h3>
+            <div id="countdown">
+                <div class="time-box"><span id="days">00</span><p>Días</p></div>
+                <div class="time-box"><span id="hours">00</span><p>Horas</p></div>
+                <div class="time-box"><span id="minutes">00</span><p>Min</p></div>
+                <div class="time-box"><span id="seconds">00</span><p>Seg</p></div>
+            </div>
+        </section>
+
+        <!-- Ubicaciones e Información -->
+        <section class="details-section">
+            <div class="card">
+                <img src="/Users/dianafernandez/Desktop/Nuestra boda/Catedral de Zacatecas.jpeg" alt="Catedral Basílica de Zacatecas" class="card-image">
+                <h3>Ceremonia Religiosa</h3>
+                <p><strong>1:00 PM</strong></p>
+                <p>Catedral Basilica de Zacatecas</p>
+                <p>Zacatecas, Zac.</p>
+                <a href="Av. Hidalgo 617, Zacatecas Centro, 98000 Zacatecas, Zac." target="_blank" class= "btn">Cómo llegar</a>
+            </div>
+
+            <div class="card">
+                <h3>Recepción</h3>
+                <p><strong>4:30 PM</strong></p>
+                <p>Salon de Eventos "El Corral"</p>
+                <a href="De La Luna 54, Col del Sol, 99055 Fresnillo, Zac." target="_blank" class="btn">Cómo llegar</a>
+            </div>
+        </section>
+        <!-- III - ITINERARIO -->
+        <section class="itinerary-section">
+            <h2 class="section-title">Itinerario</h2>
+            
+            <div class="itinerary-grid">
+                <div class="itinerary-item">
+                    <div class="itinerary-content">
+                        <h3>Ceremonia Religiosa</h3>
+                        <span class="time">1:00 PM</span>
+                        <p>Catedral Basílica de Zacatecas</p>
+                        <a href="https://maps.app.goo.gl/..." target="_blank" class="btn-mini">Ver Mapa</a>
+                    </div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content">
+                        <h3>Recepción</h3>
+                        <span class="time">4:30 PM</span>
+                        <p>Salón de Eventos "El Corral"</p>
+                        <a href="https://maps.app.goo.gl/..." target="_blank" class="btn-mini">Ver Mapa</a>
+                    </div>
+                </div>
+                  <div class="itinerary-item">
+                    <div class="itinerary-content">
+                        <h3>Comida</h3>
+                        <p>Banquete </p>
+                        <span class="time">5:00- 7:00 PM</span>
+                    </div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content">
+                        <h3>El Vals y Protocolo</h3>
+                           <p>Momento mágico de los novios</p>
+                        <span class="time">7:30- 9:00 PM</span>
+                       
+                    </div>
+                </div>
+
+                <div class="itinerary-item">
+                    <div class="itinerary-content">
+                        <h3>Baile y Fiesta</h3>
+                        <p>Apertura de la pista</p>
+                       <span class="time">9:00 PM</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- V - CÓDIGO DE VESTIMENTA -->
+        <section class="details-section">
+            <div class="card dresscode-card">
+                <h2 class="card-title-gold">Código de Vestimenta</h2>
+                <div class="dress-icons">
+                    <!-- Puedes colocar aquí tus imágenes o iconos vectoriales -->
+                    <span class="icon-dress">👗</span>
+                    <span class="icon-suit">👔🤠</span>
+                </div>
+            <p>Para la ceremonia y recepción </p>
+            <p>Por favor, eviten el color blanco en la vestimenta, ya que es un color reservado para la novia.</p>
+                <p>Agradecemos su comprensión y cooperación en este momento tan especial.</p>
+            </div>
+        </section>
+         <!-- Galería / Álbum de Fotos -->
+        <section class="gallery-section">
+            <h3>Galería de Fotos</h3>
+            <p class="gallery-subtitle">Toca una foto para verla en tamaño completo</p> 
+            <div class="photo-grid">
+
+                <!-- Foto 1 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-02 at 00.32.18 (1).jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-02 at 00.32.18 (1).jpeg" alt="Momento 1">
+                </div>
+                <!-- Foto 2 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/FOTO4.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/FOTO4.jpeg" alt="Momento 2">
+                </div>
+                <!-- Foto 3 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/FOTO6.jpeg ')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/FOTO6.jpeg" alt="Momento 3">
+                </div>
+                <!-- Foto 4 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-09 at 17.58.15.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-09 at 17.58.15.jpeg" alt="Momento 4">
+                </div>
+                <!-- Foto 5 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-09 at 18.01.02.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-09 at 18.01.02.jpeg" alt="Momento 5">
+                </div>
+                <!-- Foto 6 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-09 at 18.02.55.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/WhatsApp Image 2026-06-09 at 18.02.55.jpeg " alt="Momento 6">          
+                </div> 
+                <!-- Foto 7 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/FOTO2.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/FOTO2.jpeg" alt="Momento 7">  
+            </div>
+            <!-- Foto 8 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/FOTO3.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/FOTO3.jpeg" alt="Momento 8">
+                </div>
+                <!-- Foto 9 -->
+                <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/FOTO5.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/FOTO5.jpeg" alt="Momento 9">
+                </div>
+                <!-- Foto 10 -->
+                 <div class="photo-item" onclick="openLightbox('/Users/dianafernandez/Desktop/Nuestra boda/FOTO8.jpeg')">
+                    <img src="/Users/dianafernandez/Desktop/Nuestra boda/FOTO8.jpeg" alt="Momento 10">  
+            </div>
+        </section>
+  </div>
+    
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+       <img id="lightbox-img" src="" alt="Imagen ampliada">
+</div> 
+
+    <script src="script.js"></script>
+</body>
+</html>
