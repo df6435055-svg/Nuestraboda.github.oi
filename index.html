@@ -176,6 +176,20 @@
         <span class="close-btn">&times;</span>
        <img id="lightbox-img" src="" alt="Imagen ampliada">
 </div> 
+    <!-- Contenedor flotante para ver la foto grande -->
+<div id="lightbox" class="lightbox" style="display: none;">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    
+    <!-- Flecha Izquierda -->
+    <button class="prev-btn" onclick="changeImage(-1)">&#10094;</button>
+    
+    <!-- Imagen Grande -->
+    <img id="lightbox-img" src="" alt="Imagen Grande">
+    
+    <!-- Flecha Derecha -->
+    <button class="next-btn" onclick="changeImage(1)">&#10095;</button>
+</div>
+
 
     <script src="script.js"></script>
 </body>
