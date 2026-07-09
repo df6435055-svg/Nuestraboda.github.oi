@@ -63,3 +63,49 @@ document.addEventListener('click', () => {
         }).catch(err => console.log("Esperando interacción directa..."));
     }
 }, { once: true }); // '{ once: true }' asegura que este detector solo se ejecute la primera vez
+// 1. Lista con las rutas exactas de todas tus fotos en orden
+const images = [
+    'nuestra_boda/foto1.jpeg',
+    'nuestra_boda/foto4.jpeg',
+    'nuestra_boda/foto6.jpeg',
+    'nuestra_boda/foto9.jpeg',
+    'nuestra_boda/foto11.jpeg',
+    'nuestra_boda/foto12.jpeg',
+    'nuestra_boda/foto2.jpeg',
+    'nuestra_boda/foto3.jpeg',
+    'nuestra_boda/foto5.jpeg' // Añade aquí la ruta de la foto 9 si falta
+];
+
+let currentIndex = 0;
+
+// 2. Función para abrir la foto grande
+function openLightbox(index) {
+    currentIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    
+    lightboxImg.src = images[currentIndex];
+    lightbox.style.display = 'flex'; // Muestra el contenedor
+}
+
+// 3. Función para cerrar el Lightbox
+function closeLightbox() {
+    document.getElementById('lightbox').style.style.display = 'none';
+}
+
+// 4. Función para cambiar de foto (flechas izquierda/derecha)
+function changeImage(direction) {
+    currentIndex += direction;
+    
+    // Si se pasa del final, regresa a la primera
+    if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+    // Si se va antes de la primera, se pasa a la última
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+    }
+    
+    document.getElementById('lightbox-img').src = images[currentIndex];
+}
+
