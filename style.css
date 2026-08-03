@@ -17,6 +17,112 @@ body {
     min-height: 100vh;
     padding: 20px;
 }
+/* ==========================================
+   2. SOBRE AZUL Y ANIMACIÓN 3D
+   ========================================== */
+
+.envelope-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 580px;
+    background: #0d2342; /* Azul elegante del cuerpo del sobre */
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(223, 177, 91, 0.2);
+    cursor: pointer;
+    perspective: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transition: all 0.6s ease;
+}
+
+/* Solapa Superior del Sobre (Triángulo superior) */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(135deg, #122e56, #0a1c36);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+/* Sello de Cera Dorado (D&B) */
+.wax-seal {
+    position: absolute;
+    top: 250px;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    width: 65px;
+    height: 65px;
+    background: radial-gradient(circle, #dfb15b 0%, #a87e2a 100%);
+    border-radius: 50%;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 6;
+    transition: all 0.5s ease;
+}
+
+.seal-inner {
+    font-family: 'Great Vibes', cursive;
+    color: #3b2805;
+    font-weight: bold;
+    font-size: 1.4rem;
+    border: 1px dashed #3b2805;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bolsillo Inferior del Sobre */
+.envelope-pocket {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 320px;
+    background: linear-gradient(0deg, #09172c 0%, #0f2a50 100%);
+    clip-path: polygon(0 20%, 50% 0%, 100% 20%, 100% 100%, 0 100%);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 4;
+}
+
+/* ESTADO ABIERTO DEL SOBRE (Se activa al hacer clic) */
+.envelope-wrapper.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1; /* Pasa por detrás */
+}
+
+.envelope-wrapper.open .wax-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+    pointer-events: none;
+}
+
+.envelope-wrapper.open .invitation-container {
+    transform: translateY(-20px) scale(1);
+    opacity: 1;
+    z-index: 10;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+}
+
+.envelope-wrapper.open {
+    height: auto;
+    background: transparent;
+    box-shadow: none;
+}
 
 /* ==========================================================================
    CONTENEDOR DE LA INVITACIÓN (Cuerpo tipo Celular)
