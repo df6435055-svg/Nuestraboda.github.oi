@@ -1,7 +1,4 @@
-const envelope = document..getElementById('envelope-container');
-envelope.addEventListener('clic', function() {
-    this.classList.toggle('open');
-});
+
 const music = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-control');
 const musicIcon = document.getElementById('music-icon');
