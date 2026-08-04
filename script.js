@@ -1,4 +1,30 @@
 
+
+// Configuración de la fecha del evento (Año, Mes [0-11], Día, Hora, Minutos)
+const eventDate = new Date(2026, 12, 11, 13, 0, 0).getTime(); // 11 de Diciembre de 2026 a la 1:00 PM
+
+const countdownInterval = setInterval(() => {
+    const now = new Date().getTime();
+    const difference = eventDate - now;
+
+    // Cálculos matemáticos de conversión de tiempo
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    // Renderizado en el HTML agregando ceros a la izquierda si son menores a 10
+    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+    document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+    document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+    // Acción en caso de cumplirse el tiempo límite
+    if (difference < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown").innerHTML = "<p style='color:#2b5c8f; font-weight:600;'>¡Llegó el gran día!</p>";
+    }
+}, 1000);
 const music = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-control');
 const musicIcon = document.getElementById('music-icon');
@@ -25,31 +51,6 @@ document.addEventListener('click', () => {
             musicBtn.classList.add('music-playing');
         }).catch(err => console.log("Esperando interacción directa..."));
     }
-// Configuración de la fecha del evento (Año, Mes [0-11], Día, Hora, Minutos)
-const eventDate = new Date(2026, 12, 11, 13, 0, 0).getTime(); // 11 de Diciembre de 2026 a la 1:00 PM
-
-const countdownInterval = setInterval(() => {
-    const now = new Date().getTime();
-    const difference = eventDate - now;
-
-    // Cálculos matemáticos de conversión de tiempo
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    // Renderizado en el HTML agregando ceros a la izquierda si son menores a 10
-    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-    document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-    document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-    document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-
-    // Acción en caso de cumplirse el tiempo límite
-    if (difference < 0) {
-        clearInterval(countdownInterval);
-        document.getElementById("countdown").innerHTML = "<p style='color:#2b5c8f; font-weight:600;'>¡Llegó el gran día!</p>";
-    }
-}, 1000);
 
 // Abrir y cerrar fotos en pantalla completa
 function openLightbox(imageSrc) {
