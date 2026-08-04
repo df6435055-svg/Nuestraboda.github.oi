@@ -29,28 +29,7 @@ const music = document.getElementById('bg-music');
 const musicBtn = document.getElementById('music-control');
 const musicIcon = document.getElementById('music-icon');
 
-// Función para reproducir o pausar con el botón
-function toggleMusic() {
-    if (music.paused) {
-        music.play().then(() => {
-            musicIcon.innerText = "⏯️";
-            musicBtn.classList.add('music-playing');
-        }).catch(error => console.log("Reproducción bloqueada por el navegador"));
-    } else {
-        music.pause();
-        musicIcon.innerText = "⏸️";
-        musicBtn.classList.remove('music-playing');
-    }
-}
 
-// Alternativa automática: intenta reproducir al primer clic o interacción del usuario en la pantalla
-document.addEventListener('click', () => {
-    if (music.paused) {
-        music.play().then(() => {
-            musicIcon.innerText = "⏸️";
-            musicBtn.classList.add('music-playing');
-        }).catch(err => console.log("Esperando interacción directa..."));
-    }
 
 // Abrir y cerrar fotos en pantalla completa
 function openLightbox(imageSrc) {
@@ -109,4 +88,25 @@ function changeImage(direction) {
     
     document.getElementById('lightbox-img').src = images[currentIndex];
 }
+// Función para reproducir o pausar con el botón
+function toggleMusic() {
+    if (music.paused) {
+        music.play().then(() => {
+            musicIcon.innerText = "⏯️";
+            musicBtn.classList.add('music-playing');
+        }).catch(error => console.log("Reproducción bloqueada por el navegador"));
+    } else {
+        music.pause();
+        musicIcon.innerText = "⏸️";
+        musicBtn.classList.remove('music-playing');
+    }
+}
 
+// Alternativa automática: intenta reproducir al primer clic o interacción del usuario en la pantalla
+document.addEventListener('click', () => {
+    if (music.paused) {
+        music.play().then(() => {
+            musicIcon.innerText = "⏸️";
+            musicBtn.classList.add('music-playing');
+        }).catch(err => console.log("Esperando interacción directa..."));
+    }
