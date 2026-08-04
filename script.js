@@ -89,7 +89,7 @@ function openLightbox(index) {
     lightbox.style.display = 'flex'; // Muestra el contenedor
 }
 
-/ 3. Función para cerrar el lightbox
+// 3. Función para cerrar el lightbox
 function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
 }
