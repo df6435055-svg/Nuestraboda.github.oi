@@ -1,3 +1,6 @@
+const music = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-control');
+const musicIcon = document.getElementById('music-icon');
 // Función para reproducir o pausar con el botón
 function toggleMusic() {
     if (music.paused) {
@@ -46,9 +49,7 @@ const countdownInterval = setInterval(() => {
         document.getElementById("countdown").innerHTML = "<p style='color:#2b5c8f; font-weight:600;'>¡Llegó el gran día!</p>";
     }
 }, 1000);
-const music = document.getElementById('bg-music');
-const musicBtn = document.getElementById('music-control');
-const musicIcon = document.getElementById('music-icon');
+
 
 
 
