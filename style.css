@@ -425,3 +425,22 @@ body {
 .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 4px; border: 2px solid #dfb15b; }
 .close-btn { position: absolute; top: 20px; right: 30px; color: #dfb15b; font-size: 40px; cursor: pointer; }
 
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Altura dinámica para barras de Safari */
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* Asegura que la imagen flotante quede arriba de todo */
+}
+
+#lightbox-img {
+    max-width: 90%;
+    max-height: 80%;
+    object-fit: contain;
+}
