@@ -23,43 +23,51 @@ const countdownInterval = setInterval(() => {
         clearInterval(countdownInterval);
         document.getElementById("countdown").innerHTML = "<p style='color:#2b5c8f; font-weight:600;'>¡Llegó el gran día!</p>";
     }
-}, 1000);
-// Función para pausar / reanudar la música desde el botón flotante[span_2](start_span)[span_2](end_span)
-function toggleMusic() {
-    const music = document.getElementById('bg-music');[span_3](start_span)[span_3](end_span)
-    const icon = document.getElementById('music-icon');[span_4](start_span)[span_4](end_span)
+}, 1000);unction playMusic() {
+    const music = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
     
-    if (music.paused) {[span_5](start_span)[span_5](end_span)
-        music.play();[span_6](start_span)[span_6](end_span)
-        icon.innerText = "🎵";[span_7](start_span)[span_7](end_span)
+    if (music) {
+        // Cargar explícitamente el recurso de audio antes de reproducir en iOS
+        music.load(); 
+        const promise = music.play();
+        
+        if (promise !== undefined) {
+            promise.then(() => {
+                if (icon) icon.innerText = "🎵";
+            }).catch(error => {
+                console.log("iOS desbloquea el audio al primer toque interactivo.");
+            });
+        }
+    }
+}
+
+function toggleMusic() {
+    const music = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    
+    if (!music) return;
+
+    if (music.paused) {
+        music.play().then(() => {
+            if (icon) icon.innerText = "🎵";
+        }).catch(e => console.log("Error al reproducir audio:", e));
     } else {
-        music.pause();[span_8](start_span)[span_8](end_span)
-        icon.innerText = "🔇";[span_9](start_span)[span_9](end_span)
+        music.pause();
+        if (icon) icon.innerText = "🔇";
     }
 }
 
-// Reproducción al interactuar por primera vez con la pantalla[span_10](start_span)[span_10](end_span)
-document.addEventListener('click', function startMusicOnFirstTouch() {
-    const music = document.getElementById('bg-music');[span_11](start_span)[span_11](end_span)
-    if (music && music.paused) {[span_12](start_span)[span_12](end_span)
-        music.play().catch(e => console.log("Espera interacción directa..."));[span_13](start_span)[span_13](end_span)
-    }
-}, { once: true });
+// Activar reproducción con cualquier evento táctil en la pantalla para Safari
+['touchstart', 'click'].forEach(eventType => {
+    document.addEventListener(eventType, function initAudioOnTouch() {
+        const music = document.getElementById('bg-music');
+        if (music && music.paused) {
+            playMusic();
+        }
+    }, { once: true });
+});
 
-
-// Abrir y cerrar fotos en pantalla completa
-function openLightbox(imageSrc) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = imageSrc;
-    lightbox.style.display = 'flex'; // Aquí se vuelve visible cubriendo la pantalla
-}
-
-function closeLightbox() {
-  const lightbox = document.getElementById('lightbox');
-  lightbox.style.display = 'none'; // Se oculta de nuevo
-}
-}, { once: true }); // '{ once: true }' asegura que este detector solo se ejecute la primera vez
 // 1. Lista con las rutas exactas de todas tus fotos en orden
 const images = [
     'nuestra_boda/foto1.jpeg',
@@ -75,33 +83,40 @@ const images = [
 
 let currentIndex = 0;
 
-// 2. Función para abrir la foto grande
 function openLightbox(index) {
     currentIndex = index;
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    
-    lightboxImg.src = images[currentIndex];
-    lightbox.style.display = 'flex'; // Muestra el contenedor
+
+    if (lightbox && lightboxImg) {
+        lightboxImg.src = images[currentIndex];
+        // Forzar estilos inline para asegurar visibilidad en Safari
+        lightbox.style.display = 'flex';
+        lightbox.style.visibility = 'visible';
+        lightbox.style.opacity = '1';
+    }
 }
 
-// 3. Función para cerrar el lightbox
 function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.style.display = 'none';
+        lightbox.style.opacity = '0';
+    }
 }
-// 4. Función para cambiar de foto (flechas izquierda/derecha)
+
 function changeImage(direction) {
     currentIndex += direction;
-    
-    // Si se pasa del final, regresa a la primera
+
     if (currentIndex >= images.length) {
         currentIndex = 0;
-    }
-    // Si se va antes de la primera, se pasa a la última
-    if (currentIndex < 0) {
+    } else if (currentIndex < 0) {
         currentIndex = images.length - 1;
     }
-    
-    document.getElementById('lightbox-img').src = images[currentIndex];
+
+    const lightboxImg = document.getElementById('lightbox-img');
+    if (lightboxImg) {
+        lightboxImg.src = images[currentIndex];
+    }
 }
 
