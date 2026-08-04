@@ -24,32 +24,27 @@ const countdownInterval = setInterval(() => {
         document.getElementById("countdown").innerHTML = "<p style='color:#2b5c8f; font-weight:600;'>¡Llegó el gran día!</p>";
     }
 }, 1000);
-const music = document.getElementById('bg-music');
-const musicBtn = document.getElementById('music-control');
-const musicIcon = document.getElementById('music-icon');
-// Función para reproducir o pausar con el botón
+// Función para pausar / reanudar la música desde el botón flotante[span_2](start_span)[span_2](end_span)
 function toggleMusic() {
-    if (music.paused) {
-        music.play().then(() => {
-            musicIcon.innerText = "⏯️";
-            musicBtn.classList.add('music-playing');
-        }).catch(error => console.log("Reproducción bloqueada por el navegador"));
+    const music = document.getElementById('bg-music');[span_3](start_span)[span_3](end_span)
+    const icon = document.getElementById('music-icon');[span_4](start_span)[span_4](end_span)
+    
+    if (music.paused) {[span_5](start_span)[span_5](end_span)
+        music.play();[span_6](start_span)[span_6](end_span)
+        icon.innerText = "🎵";[span_7](start_span)[span_7](end_span)
     } else {
-        music.pause();
-        musicIcon.innerText = "⏸️";
-        musicBtn.classList.remove('music-playing');
+        music.pause();[span_8](start_span)[span_8](end_span)
+        icon.innerText = "🔇";[span_9](start_span)[span_9](end_span)
     }
 }
 
-// Alternativa automática: intenta reproducir al primer clic o interacción del usuario en la pantalla
-document.addEventListener('click', () => {
-    if (music.paused) {
-        music.play().then(() => {
-            musicIcon.innerText = "⏸️";
-            musicBtn.classList.add('music-playing');
-        }).catch(err => console.log("Esperando interacción directa..."));
+// Reproducción al interactuar por primera vez con la pantalla[span_10](start_span)[span_10](end_span)
+document.addEventListener('click', function startMusicOnFirstTouch() {
+    const music = document.getElementById('bg-music');[span_11](start_span)[span_11](end_span)
+    if (music && music.paused) {[span_12](start_span)[span_12](end_span)
+        music.play().catch(e => console.log("Espera interacción directa..."));[span_13](start_span)[span_13](end_span)
     }
-
+}, { once: true });
 
 
 // Abrir y cerrar fotos en pantalla completa
