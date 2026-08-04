@@ -424,3 +424,15 @@ body {
 
 .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 4px; border: 2px solid #dfb15b; }
 .close-btn { position: absolute; top: 20px; right: 30px; color: #dfb15b; font-size: 40px; cursor: pointer; }
+
+.final-message{
+   text-align: center;
+   padding: 30px 20px;
+   margin-top: 20px;
+}
+.final-message p{
+   font-size: 1.2rem;
+   font-style: itallic;
+   color: #555;
+   font-weight: 500;
+}
