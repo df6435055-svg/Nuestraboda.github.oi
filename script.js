@@ -89,11 +89,10 @@ function openLightbox(index) {
     lightbox.style.display = 'flex'; // Muestra el contenedor
 }
 
-// 3. Función para cerrar el Lightbox
+/ 3. Función para cerrar el lightbox
 function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
 }
-
 // 4. Función para cambiar de foto (flechas izquierda/derecha)
 function changeImage(direction) {
     currentIndex += direction;
