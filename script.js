@@ -1,4 +1,25 @@
+// Función para reproducir o pausar con el botón
+function toggleMusic() {
+    if (music.paused) {
+        music.play().then(() => {
+            musicIcon.innerText = "⏯️";
+            musicBtn.classList.add('music-playing');
+        }).catch(error => console.log("Reproducción bloqueada por el navegador"));
+    } else {
+        music.pause();
+        musicIcon.innerText = "⏸️";
+        musicBtn.classList.remove('music-playing');
+    }
+}
 
+// Alternativa automática: intenta reproducir al primer clic o interacción del usuario en la pantalla
+document.addEventListener('click', () => {
+    if (music.paused) {
+        music.play().then(() => {
+            musicIcon.innerText = "⏸️";
+            musicBtn.classList.add('music-playing');
+        }).catch(err => console.log("Esperando interacción directa..."));
+    }
 
 // Configuración de la fecha del evento (Año, Mes [0-11], Día, Hora, Minutos)
 const eventDate = new Date(2026, 12, 11, 13, 0, 0).getTime(); // 11 de Diciembre de 2026 a la 1:00 PM
@@ -88,25 +109,4 @@ function changeImage(direction) {
     
     document.getElementById('lightbox-img').src = images[currentIndex];
 }
-// Función para reproducir o pausar con el botón
-function toggleMusic() {
-    if (music.paused) {
-        music.play().then(() => {
-            musicIcon.innerText = "⏯️";
-            musicBtn.classList.add('music-playing');
-        }).catch(error => console.log("Reproducción bloqueada por el navegador"));
-    } else {
-        music.pause();
-        musicIcon.innerText = "⏸️";
-        musicBtn.classList.remove('music-playing');
-    }
-}
 
-// Alternativa automática: intenta reproducir al primer clic o interacción del usuario en la pantalla
-document.addEventListener('click', () => {
-    if (music.paused) {
-        music.play().then(() => {
-            musicIcon.innerText = "⏸️";
-            musicBtn.classList.add('music-playing');
-        }).catch(err => console.log("Esperando interacción directa..."));
-    }
