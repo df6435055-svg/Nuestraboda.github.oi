@@ -425,12 +425,3 @@ body {
 .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 4px; border: 2px solid #dfb15b; }
 .close-btn { position: absolute; top: 20px; right: 30px; color: #dfb15b; font-size: 40px; cursor: pointer; }
 
-final-message {
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    font-style: italic;
-    color: #333333; /* Cambia el color si usas otro tono en tu tema */
-    margin: 30px 0 10px 0; /* Separa el texto de la sección anterior */
-    padding: 15px;
-}
