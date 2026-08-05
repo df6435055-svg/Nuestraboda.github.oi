@@ -1,42 +1,51 @@
+// ==========================================
+// 1. CONFIGURACIÓN DE LA FECHA Y CUENTA REGRESIVA
+// ==========================================
+const eventDate = new Date(2026, 12, 11, 13, 0, 0); // Ajusta aquí la fecha objetivo[span_0](start_span)[span_0](end_span)
 
-// Configuración de la fecha del evento (Año, Mes [0-11], Día, Hora, Minutos)
-const eventDate = new Date(2026, 12, 11, 13, 0, 0).getTime(); // 11 de Diciembre de 2026 a la 1:00 PM
-
-const countdownInterval = setInterval(() => {
+function updateCountdown() {
     const now = new Date().getTime();
     const difference = eventDate - now;
 
-    // Cálculos matemáticos de conversión de tiempo
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    // Renderizado en el HTML agregando ceros a la izquierda si son menores a 10
-    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-    document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-    document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-    document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hours");
+        const minutesEl = document.getElementById("minutes");
+        const secondsEl = document.getElementById("seconds");
 
-    // Acción en caso de cumplirse el tiempo límite
-    if (difference < 0) {
-        clearInterval(countdownInterval);
-        document.getElementById("countdown").innerHTML = "<p style='color:#2b5c8f; font-weight:600;'>¡Llegó el gran día!</p>";
+        if (daysEl) daysEl.innerText = days < 10 ? '0' + days : days;
+        if (hoursEl) hoursEl.innerText = hours < 10 ? '0' + hours : hours;
+        if (minutesEl) minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
+        if (secondsEl) secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
     }
-}, 1000);unction playMusic() {
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+
+// ==========================================
+// 2. CONTROL DE MÚSICA DE FONDO (COMPATIBLE CON IOS)
+// ==========================================
+
+function playMusic() {
     const music = document.getElementById('bg-music');
     const icon = document.getElementById('music-icon');
-    
+
     if (music) {
-        // Cargar explícitamente el recurso de audio antes de reproducir en iOS
-        music.load(); 
+        music.load(); // Fuerza el buffer en dispositivos iOS
         const promise = music.play();
-        
+
         if (promise !== undefined) {
             promise.then(() => {
-                if (icon) icon.innerText = "🎵";
-            }).catch(error => {
-                console.log("iOS desbloquea el audio al primer toque interactivo.");
+                if (icon) icon.innerText = "⏯️";
+            }).catch(() => {
+                // Silencia el error en consola si Safari retiene el audio
             });
         }
     }
@@ -45,20 +54,20 @@ const countdownInterval = setInterval(() => {
 function toggleMusic() {
     const music = document.getElementById('bg-music');
     const icon = document.getElementById('music-icon');
-    
+
     if (!music) return;
 
     if (music.paused) {
         music.play().then(() => {
-            if (icon) icon.innerText = "🎵";
-        }).catch(e => console.log("Error al reproducir audio:", e));
+            if (icon) icon.innerText = "⏯️";
+        }).catch(e => console.log("Audio detenido:", e));
     } else {
         music.pause();
         if (icon) icon.innerText = "🔇";
     }
 }
 
-// Activar reproducción con cualquier evento táctil en la pantalla para Safari
+// Inicializa el reproductor con la primera interacción del usuario en móviles
 ['touchstart', 'click'].forEach(eventType => {
     document.addEventListener(eventType, function initAudioOnTouch() {
         const music = document.getElementById('bg-music');
@@ -68,17 +77,21 @@ function toggleMusic() {
     }, { once: true });
 });
 
-// 1. Lista con las rutas exactas de todas tus fotos en orden
+
+// ==========================================
+// 3. GALERÍA DE FOTOS / LIGHTBOX (COMPATIBLE CON TOUCH)
+// ==========================================
+// Nota: Verifica que el nombre exacto de la carpeta y archivos coincida con GitHub (Respetando Mayúsculas y Minúsculas)[span_1](start_span)[span_1](end_span)
 const images = [
     'nuestra_boda/foto1.jpeg',
     'nuestra_boda/foto4.jpeg',
     'nuestra_boda/foto6.jpeg',
-    'nuestra_boda/foto9.jpeg',
+    'nuestra_boda/foto9.jpeg'
     'nuestra_boda/foto11.jpeg',
     'nuestra_boda/foto12.jpeg',
     'nuestra_boda/foto2.jpeg',
-    'nuestra_boda/foto3.jpeg',
-    'nuestra_boda/foto5.jpeg' // Añade aquí la ruta de la foto 9 si falta
+    'nuestra_boda/foto3.jpeg'
+    'nuestra_boda/foto5.jpeg'
 ];
 
 let currentIndex = 0;
@@ -90,10 +103,7 @@ function openLightbox(index) {
 
     if (lightbox && lightboxImg) {
         lightboxImg.src = images[currentIndex];
-        // Forzar estilos inline para asegurar visibilidad en Safari
         lightbox.style.display = 'flex';
-        lightbox.style.visibility = 'visible';
-        lightbox.style.opacity = '1';
     }
 }
 
@@ -101,7 +111,6 @@ function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
         lightbox.style.display = 'none';
-        lightbox.style.opacity = '0';
     }
 }
 
@@ -119,4 +128,3 @@ function changeImage(direction) {
         lightboxImg.src = images[currentIndex];
     }
 }
-
