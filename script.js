@@ -1,39 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // --- 1. REPRODUCTOR DE MÚSICA (Compatible con iOS y Android) ---
   const audio = document.getElementById("bg-music");
   const musicToggleBtn = document.getElementById("music-toggle");
 
-  if (audio) {
+  if (audio && musicToggleBtn) {
     audio.loop = true;
 
-    const unlockAudio = () => {
-      audio.play().then(() => {
-        if (musicToggleBtn) musicToggleBtn.textContent = "Pausar Música";
-      }).catch(err => console.log("Audio bloqueado:", err));
+    musicToggleBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Evita comportamientos extraños de enlaces en Android
+      e.stopPropagation();
 
-      document.removeEventListener("click", unlockAudio);
-      document.removeEventListener("touchstart", unlockAudio);
-      document.removeEventListener("scroll", unlockAudio);
-    };
-
-    document.addEventListener("click", unlockAudio);
-    document.addEventListener("touchstart", unlockAudio);
-    document.addEventListener("scroll", unlockAudio);
-
-    if (musicToggleBtn) {
-      musicToggleBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (audio.paused) {
-          audio.play();
-          musicToggleBtn.textContent = "Pausar Música";
-        } else {
-          audio.pause();
-          musicToggleBtn.textContent = "Reproducir Música";
-        }
-      });
-    }
+      if (audio.paused) {
+        audio.play().then(() => {
+          musicToggleBtn.textContent = "⏯️ Pausar Música";
+        }).catch(err => {
+          console.log("Error al reproducir en Android:", err);
+        });
+      } else {
+        audio.pause();
+        musicToggleBtn.textContent = "⏯️ Reproducir Música";
+      }
+    });
   }
+});
   // --- 2. CUENTA REGRESIVA ---
   const weddingDate = new Date("December 11, 2026 17:00:00").getTime();
 
