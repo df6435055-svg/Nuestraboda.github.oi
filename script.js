@@ -1,45 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
+ // --- 1. REPRODUCTOR DE MÚSICA (Compatible con iOS y Android) ---
   const audio = document.getElementById("bg-music");
   const musicToggleBtn = document.getElementById("music-toggle");
 
   if (audio) {
     audio.loop = true;
 
-    // Función que detecta el primer toque o scroll en el celular para liberar el audio
-    const unlockAndPlay = () => {
+    const unlockAudio = () => {
       audio.play().then(() => {
-        // Si arrancó con éxito, cambiamos el texto del botón
-        if (musicToggleBtn) musicToggleBtn.textContent = "🔇 Pausar Música";
-      }).catch(err => {
-        console.log("El navegador pidió otra interacción:", err);
-      });
+        if (musicToggleBtn) musicToggleBtn.textContent = "Pausar Música";
+      }).catch(err => console.log("Audio bloqueado:", err));
 
-      // Eliminamos los detectores para que solo ocurra en el primer toque
-      document.removeEventListener("click", unlockAndPlay);
-      document.removeEventListener("touchstart", unlockAndPlay);
-      document.removeEventListener("scroll", unlockAndPlay);
+      document.removeEventListener("click", unlockAudio);
+      document.removeEventListener("touchstart", unlockAudio);
+      document.removeEventListener("scroll", unlockAudio);
     };
 
-    // Escuchamos cualquier toque, clic o deslizamiento en el celular
-    document.addEventListener("click", unlockAndPlay);
-    document.addEventListener("touchstart", unlockAndPlay);
-    document.addEventListener("scroll", unlockAndPlay);
+    document.addEventListener("click", unlockAudio);
+    document.addEventListener("touchstart", unlockAudio);
+    document.addEventListener("scroll", unlockAudio);
 
-    // Permitir pausar y reproducir manualmente con el botón flotante
     if (musicToggleBtn) {
       musicToggleBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // Evita conflictos con el evento de la pantalla
+        e.stopPropagation();
         if (audio.paused) {
           audio.play();
-          musicToggleBtn.textContent = "🔇 Pausar Música";
+          musicToggleBtn.textContent = "Pausar Música";
         } else {
           audio.pause();
-          musicToggleBtn.textContent = "🎵 Reproducir Música";
+          musicToggleBtn.textContent = "Reproducir Música";
         }
       });
     }
   }
-});
 
   // --- 2. CUENTA REGRESIVA ---
   const weddingDate = new Date("December 11, 2026 17:00:00").getTime();
