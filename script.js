@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (audio.paused) {
         audio.play().then(() => {
-          musicToggleBtn.textContent = "🔇 Pausar Música";
+          musicToggleBtn.textContent = "🔇";
         }).catch(err => {
           console.log("Error al reproducir en Android:", err);
         });
       } else {
         audio.pause();
-        musicToggleBtn.textContent = "🎵 Reproducir Música";
+        musicToggleBtn.textContent = "🎵";
       }
     });
   }
