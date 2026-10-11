@@ -11,19 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (audio.paused) {
         audio.play().then(() => {
-          musicToggleBtn.textContent = " Pausar Música";
+          musicToggleBtn.textContent = "🔇 Pausar Música";
         }).catch(err => {
           console.log("Error al reproducir en Android:", err);
         });
       } else {
         audio.pause();
-        musicToggleBtn.textContent = "⏯️ Reproducir Música";
+        musicToggleBtn.textContent = "🎵 Reproducir Música";
       }
     });
   }
 
   // --- 2. CUENTA REGRESIVA ---
-  const weddingDate = new Date("December 11, 2026 17:00:00").getTime();
+  const weddingDate = new Date("December 11, 2026 13:00:00").getTime();
 
   const updateCountdown = () => {
     const now = new Date().getTime();
