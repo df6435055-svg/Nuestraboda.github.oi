@@ -1,130 +1,113 @@
-// ==========================================
-// 1. CONFIGURACIÓN DE LA FECHA Y CUENTA REGRESIVA
-// ==========================================
-const eventDate = new Date(2026, 12, 11, 13, 0, 0); // Ajusta aquí la fecha objetivo[span_0](start_span)[span_0](end_span)
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // --- 1. REPRODUCTOR DE MÚSICA (Compatible con iOS y Android) ---
+  const audio = document.getElementById("bg-music");
+  const musicToggleBtn = document.getElementById("music-toggle");
 
-function updateCountdown() {
+  if (audio) {
+    audio.loop = true;
+
+    const unlockAudio = () => {
+      audio.play().then(() => {
+        if (musicToggleBtn) musicToggleBtn.textContent = "Pausar Música";
+      }).catch(err => console.log("Audio bloqueado:", err));
+
+      document.removeEventListener("click", unlockAudio);
+      document.removeEventListener("touchstart", unlockAudio);
+      document.removeEventListener("scroll", unlockAudio);
+    };
+
+    document.addEventListener("click", unlockAudio);
+    document.addEventListener("touchstart", unlockAudio);
+    document.addEventListener("scroll", unlockAudio);
+
+    if (musicToggleBtn) {
+      musicToggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (audio.paused) {
+          audio.play();
+          musicToggleBtn.textContent = "Pausar Música";
+        } else {
+          audio.pause();
+          musicToggleBtn.textContent = "Reproducir Música";
+        }
+      });
+    }
+  }
+
+  // --- 2. CUENTA REGRESIVA ---
+  const weddingDate = new Date("December 11, 2026 17:00:00").getTime();
+
+  const updateCountdown = () => {
     const now = new Date().getTime();
-    const difference = eventDate - now;
+    const distance = weddingDate - now;
 
-    if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    if (distance < 0) return;
 
-        const daysEl = document.getElementById("days");
-        const hoursEl = document.getElementById("hours");
-        const minutesEl = document.getElementById("minutes");
-        const secondsEl = document.getElementById("seconds");
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        if (daysEl) daysEl.innerText = days < 10 ? '0' + days : days;
-        if (hoursEl) hoursEl.innerText = hours < 10 ? '0' + hours : hours;
-        if (minutesEl) minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
-        if (secondsEl) secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
-    }
-}
+    const setElementText = (id, text) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    };
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
+    setElementText("days", days);
+    setElementText("hours", hours);
+    setElementText("minutes", minutes);
+    setElementText("seconds", seconds);
+  };
 
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
 
-// ==========================================
-// 2. CONTROL DE MÚSICA DE FONDO (COMPATIBLE CON IOS)
-// ==========================================
+  // --- 3. GALERÍA Y LIGHTBOX (Apertura, cambio y cierre) ---
+  
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const photoItems = document.querySelectorAll(".photo-item img");
+  
+  let currentIndex = 0;
+  const imagesSrc = Array.from(photoItems).map(img => img.getAttribute("src"));
 
-function playMusic() {
-    const music = document.getElementById('bg-music');
-    const icon = document.getElementById('music-icon');
+  // Asignar el evento de clic automáticamente a cada foto de la galería
+  photoItems.forEach((img, index) => {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", () => {
+      currentIndex = index;
+      if (lightbox && lightboxImg) {
+        lightboxImg.src = imagesSrc[currentIndex];
+        lightbox.style.display = "flex";
+      }
+    });
+  });
 
-    if (music) {
-        music.load(); // Fuerza el buffer en dispositivos iOS
-        const promise = music.play();
+  // Funciones globales para los botones del Lightbox
+  window.closeLightBox = function() {
+    if (lightbox) lightbox.style.display = "none";
+  };
 
-        if (promise !== undefined) {
-            promise.then(() => {
-                if (icon) icon.innerText = "⏯️";
-            }).catch(() => {
-                // Silencia el error en consola si Safari retiene el audio
-            });
-        }
-    }
-}
-
-function toggleMusic() {
-    const music = document.getElementById('bg-music');
-    const icon = document.getElementById('music-icon');
-
-    if (!music) return;
-
-    if (music.paused) {
-        music.play().then(() => {
-            if (icon) icon.innerText = "⏯️";
-        }).catch(e => console.log("Audio detenido:", e));
-    } else {
-        music.pause();
-        if (icon) icon.innerText = "🔇";
-    }
-}
-
-// Inicializa el reproductor con la primera interacción del usuario en móviles
-['touchstart', 'click'].forEach(eventType => {
-    document.addEventListener(eventType, function initAudioOnTouch() {
-        const music = document.getElementById('bg-music');
-        if (music && music.paused) {
-            playMusic();
-        }
-    }, { once: true });
-});
-
-
-// ==========================================
-// 3. GALERÍA DE FOTOS / LIGHTBOX (COMPATIBLE CON TOUCH)
-// ==========================================
-// Nota: Verifica que el nombre exacto de la carpeta y archivos coincida con GitHub (Respetando Mayúsculas y Minúsculas)[span_1](start_span)[span_1](end_span)
-const images = [
-    'nuestra_boda/foto1.jpeg',
-    'nuestra_boda/foto4.jpeg',
-    'nuestra_boda/foto6.jpeg',
-    'nuestra_boda/foto9.jpeg'
-    'nuestra_boda/foto11.jpeg',
-    'nuestra_boda/foto12.jpeg',
-    'nuestra_boda/foto2.jpeg',
-    'nuestra_boda/foto3.jpeg'
-    'nuestra_boda/foto5.jpeg'
-];
-
-let currentIndex = 0;
-
-function openLightbox(index) {
-    currentIndex = index;
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-
-    if (lightbox && lightboxImg) {
-        lightboxImg.src = images[currentIndex];
-        lightbox.style.display = 'flex';
-    }
-}
-
-function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox) {
-        lightbox.style.display = 'none';
-    }
-}
-
-function changeImage(direction) {
+  window.changeImage = function(direction) {
+    if (imagesSrc.length === 0) return;
     currentIndex += direction;
-
-    if (currentIndex >= images.length) {
-        currentIndex = 0;
-    } else if (currentIndex < 0) {
-        currentIndex = images.length - 1;
+    if (currentIndex < 0) {
+      currentIndex = imagesSrc.length - 1;
+    } else if (currentIndex >= imagesSrc.length) {
+      currentIndex = 0;
     }
-
-    const lightboxImg = document.getElementById('lightbox-img');
     if (lightboxImg) {
-        lightboxImg.src = images[currentIndex];
+      lightboxImg.src = imagesSrc[currentIndex];
     }
-}
+  };
+
+  // Cerrar tocando el fondo oscuro
+  if (lightbox) {
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        closeLightBox();
+      }
+    });
+  }
+});

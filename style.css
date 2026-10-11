@@ -9,34 +9,33 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    /* Fondo exterior azul marino muy oscuro para que resalte la invitación */
-    background-color: #0b1a30; 
+    background-color: #0b1a30;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    -webkit-text-size-adjust: 100%;
 }
+
 /* ==========================================================================
    CONTENEDOR DE LA INVITACIÓN (Cuerpo tipo Celular)
    ========================================================================== */
 .invitation-container {
     width: 100%;
-    max-width: 450px; 
-    height: 92vh; 
-    max-height: 850px; 
-    /* Fondo Azul Real con un sutil destello al centro como la imagen de muestra */
-    background: radial-gradient(circle, #153e7e 0%, #0c234b 100%); 
-    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.6); 
-    overflow-y: auto; 
+    max-width: 450px;
+    height: 92vh;
+    max-height: 850px;
+    background: radial-gradient(circle, #153e7e 0%, #0c234b 100%);
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
     overflow-x: hidden;
-    border-radius: 16px; 
+    border-radius: 16px;
     position: relative;
-    border: 2px solid #dfb15b; /* Elegante borde delgado de oro enmarcando la invitación */
-    -webkit-overflow-scrolling: touch; 
+    border: 2px solid #dfb15b;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Barra de scroll minimalista en tono dorado */
 .invitation-container::-webkit-scrollbar {
     width: 5px;
 }
@@ -66,23 +65,22 @@ body {
     z-index: 1;
 }
 
-/* Cuadro de texto traslúcido en la portada */
 .hero-text {
-    position: relative; 
-    z-index: 2; 
+    position: relative;
+    z-index: 2;
     text-align: center;
-    background: rgba(12, 35, 75, 0.85); /* Fondo azul oscuro traslúcido */
-    padding: 20px; 
-    border-radius: 8px; 
+    background: rgba(12, 35, 75, 0.85);
+    padding: 20px;
+    border-radius: 8px;
     width: 85%;
-    border: 1px solid #dfb15b; /* Contorno dorado para el cuadro de texto */
+    border: 1px solid #dfb15b;
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-.hero-text h1 { 
-    font-family: 'Great Vibes', cursive; 
-    font-size: 3rem; 
-    color: #dfb15b; /* Nombres en Dorado Brillante */
+.hero-text h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #dfb15b;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
 }
 
@@ -91,24 +89,23 @@ body {
     font-size: 0.9rem;
     margin: 8px 0;
     font-weight: 600;
-    color: #ffffff; /* Fecha en blanco para contraste limpio */
+    color: #ffffff;
 }
 
 .event-title {
     font-size: 1rem;
     text-transform: uppercase;
-    color: #dfb15b; /* "Nuestra Boda" en Dorado */
+    color: #dfb15b;
     letter-spacing: 1px;
 }
 
-/* Botón de música estilo cuadrito rosa modificado a Oro Traslúcido */
 .music-box-btn {
     position: absolute;
     top: 20px;
     left: 20px;
     width: 38px;
     height: 38px;
-    background-color: rgba(223, 177, 91, 0.7); /* Dorado traslúcido */
+    background-color: rgba(223, 177, 91, 0.7);
     border-radius: 6px;
     display: flex;
     justify-content: center;
@@ -126,7 +123,7 @@ body {
    2. CONTADOR DE TIEMPO
    ========================================================================== */
 .countdown-section {
-    background-color: rgba(11, 26, 48, 0.5); /* Fondo oscuro semitransparente */
+    background-color: rgba(11, 26, 48, 0.5);
     padding: 25px 15px;
     text-align: center;
     border-top: 1px solid rgba(223, 177, 91, 0.3);
@@ -136,17 +133,17 @@ body {
 .countdown-section h3 {
     margin-bottom: 15px;
     font-weight: 400;
-    color: #dfb15b; /* Título en dorado */
+    color: #dfb15b;
     letter-spacing: 1px;
 }
 
 #countdown { display: flex; justify-content: space-around; }
 
-.time-box { 
-    background: #0c234b; /* Cajas de tiempo azul rey profundo */
-    padding: 10px; 
-    border-radius: 6px; 
-    width: 70px; 
+.time-box {
+    background: #0c234b;
+    padding: 10px;
+    border-radius: 6px;
+    width: 70px;
     text-align: center;
     border: 1px solid #dfb15b;
 }
@@ -158,44 +155,43 @@ body {
    ========================================================================== */
 .details-section { padding: 25px 20px; }
 
-.card { 
-    background: #0c234b; /* Tarjetas azul oscuro */
-    border: 1px solid #dfb15b; /* Marcos dorados */
-    border-radius: 8px; 
-    padding: 20px; 
-    text-align: center; 
-    margin-bottom: 20px; 
+.card {
+    background: #0c234b;
+    border: 1px solid #dfb15b;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     color: #ffffff;
 }
-/* Si usas la Opción 1 (Foto de portada de la tarjeta) */
+
 .card-img {
-    width: 100%; /* Se adapta al ancho de la tarjeta */
-    height: 150px; /* Le da una altura fija */
-    object-fit: cover; /* Corta la imagen estéticamente sin deformarla */
-    border-radius: 8px 8px 0 0; /* Redondea solo las esquinas de arriba */
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
 }
 
-.card h3 { 
-    font-family: 'Great Vibes', cursive; 
-    font-size: 2.1rem; 
-    color: #dfb15b; 
-    margin-bottom: 8px; 
+.card h3 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.1rem;
+    color: #dfb15b;
+    margin-bottom: 8px;
 }
 
 .card p strong {
-    color: #dfb15b; /* Horas resaltadas en dorado */
+    color: #dfb15b;
 }
 
-/* Botón "Cómo llegar" estilo oro de gala */
-.btn { 
-    display: inline-block; 
-    margin-top: 15px; 
-    padding: 10px 24px; 
-    background: linear-gradient(135deg, #dfb15b 0%, #b88e3c 100%); /* Degradado de oro metálico */
-    color: #0c234b; /* Texto azul oscuro pesado para que se lea claro */
-    text-decoration: none; 
-    border-radius: 20px; 
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #dfb15b 0%, #b88e3c 100%);
+    color: #0c234b;
+    text-decoration: none;
+    border-radius: 20px;
     font-weight: 600;
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -206,10 +202,10 @@ body {
     transform: translateY(-2px);
     opacity: 0.9;
 }
+
 /* ==========================================================================
    ESTILOS ADICIONALES (ITINERARIO, HOSPEDAJE, REGLAS)
    ========================================================================== */
-
 .section-title {
     font-family: 'Great Vibes', cursive;
     color: #dfb15b;
@@ -219,7 +215,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Línea de Tiempo del Itinerario */
 .itinerary-section {
     padding: 20px;
     background: rgba(11, 26, 48, 0.3);
@@ -227,7 +222,7 @@ body {
 
 .itinerary-grid {
     position: relative;
-    border-left: 2px solid #dfb15b; /* Línea dorada vertical */
+    border-left: 2px solid #dfb15b;
     margin-left: 20px;
     padding-left: 20px;
 }
@@ -237,7 +232,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* El círculo dorado que marca cada evento */
 .itinerary-item::before {
     content: '';
     position: absolute;
@@ -271,7 +265,6 @@ body {
     opacity: 0.7;
 }
 
-/* Botoncitos pequeños para el mapa dentro del itinerario */
 .btn-mini {
     display: inline-block;
     margin-top: 6px;
@@ -282,7 +275,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* Títulos Dorados Especiales dentro de Tarjetas */
 .card-title-gold {
     font-family: 'Great Vibes', cursive;
     color: #dfb15b;
@@ -291,8 +283,6 @@ body {
     font-weight: 400;
 }
 
-
-/* Detalles estéticos de vestimenta y regalos */
 .dress-icons, .icon-gift {
     font-size: 2.5rem;
     margin-bottom: 10px;
@@ -313,7 +303,7 @@ body {
     border-radius: 6px;
     border: 1px dashed rgba(223, 177, 91, 0.5);
 }
-/* Contenedores de botones dobles (Hospedaje) */
+
 .btn-group {
     display: flex;
     flex-direction: column;
@@ -327,7 +317,6 @@ body {
     border: 1px solid #dfb15b;
     color: #dfb15b !important;
 }
-
 
 /* ==========================================================================
    4. GALERÍA DE FOTOS
@@ -346,82 +335,71 @@ body {
 
 .photo-item {
     position: relative;
-    padding-bottom: 125%; 
+    padding-bottom: 125%;
     overflow: hidden;
     border-radius: 8px;
     background-color: #0c234b;
     cursor: pointer;
-    border: 1px solid rgba(223, 177, 91, 0.4); /* Fino borde dorado para las fotos */
+    border: 1px solid rgba(223, 177, 91, 0.4);
 }
 .photo-item img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
 .photo-item:hover img { transform: scale(1.05); }
 
 /* ==========================================================================
-   VISOR DE PANTALLA COMPLETA (LIGHTBOX)
+   VISOR DE PANTALLA COMPLETA (LIGHTBOX) CORREGIDO
    ========================================================================== */
 .lightbox {
-    display: none; 
-    position: fixed; 
+    display: none;
+    position: fixed;
     z-index: 99999;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
     background-color: rgba(6, 15, 31, 0.95);
-    justify-content: center; align-items: center;
+    justify-content: center; 
+    align-items: center;
     padding: 20px;
 }
-* Fondo oscuro que cubre toda la pantalla */
-.lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
 
-/* Estilo de la foto grande */
 #lightbox-img {
-    max-width: 85%;
-    max-height: 85%;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 6px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.8);
+    border: 2px solid #dfb15b;
 }
 
-/* Botón de cerrar (X) */
 .close-btn {
     position: absolute;
-    top: 20px;
+    top: 25px;
     right: 30px;
-    color: white;
+    color: #dfb15b;
     font-size: 40px;
     cursor: pointer;
-}
-
-/* Botones de las flechas */
-.prev-btn, .next-btn {
-    position: absolute;
     background: none;
     border: none;
-    color: white;
-    font-size: 35px;
-    cursor: pointer;
-    padding: 15px;
-    user-select: none;
-    transition: 0.3s;
+    z-index: 100000;
 }
 
-.prev-btn { left: 20px; }
-.next-btn { right: 20px; }
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(12, 35, 75, 0.7);
+    border: 1px solid #dfb15b;
+    color: #dfb15b;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 50%;
+    z-index: 100000;
+    transition: background 0.3s ease;
+}
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
 
 .prev-btn:hover, .next-btn:hover {
-    color: #ddd;
-    scale: 1.1;
+    background: rgba(223, 177, 91, 0.2);
 }
-
-
-.lightbox img { max-width: 90%; max-height: 80vh; border-radius: 4px; border: 2px solid #dfb15b; }
-.close-btn { position: absolute; top: 20px; right: 30px; color: #dfb15b; font-size: 40px; cursor: pointer; }
-
