@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (audio.paused) {
         audio.play().then(() => {
-          musicToggleBtn.textContent = "⏯️ Pausar Música";
+          musicToggleBtn.textContent = " Pausar Música";
         }).catch(err => {
           console.log("Error al reproducir en Android:", err);
         });
