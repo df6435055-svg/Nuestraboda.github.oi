@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+
   // --- 2. CUENTA REGRESIVA ---
   const weddingDate = new Date("December 11, 2026 17:00:00").getTime();
 
